@@ -41,13 +41,17 @@ function startSession() {
                 numSessions -= 1;
 
             if (numSessions === 0) { 
-                console.log("YOU MADE IT!!!");
+                document.getElementById("status").innerHTML = "YOU MADE IT!!!";
+                var finish_horn = new Audio('finish_horn.mp3');
+                finish_horn.play();
                 clearInterval(st);
                 return; 
             }
             else {
                 clearInterval(st); 
-                console.log("Time to Take a Break!!!"); 
+                document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
+                var ding = new Audio('ding.mp3');
+                ding.play();
                 startBreak();   
             }
             
@@ -57,8 +61,6 @@ function startSession() {
 }
 
 function startBreak() {
-
-
     var b1 = breakTimeInSeconds;
     var bt = setInterval(function() {
         console.log(b1);
@@ -67,7 +69,9 @@ function startBreak() {
         }
         else {
             clearInterval(bt);
-            console.log("Time to Start Back!!!");
+            document.getElementById("status").innerHTML = "Time to Start Back!!!";
+            var start_horn = new Audio('start_horn.mp3');
+            start_horn.play();
             startSession();    
         }
     }, 1000); 
