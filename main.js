@@ -313,7 +313,7 @@ function sendDesktopNotification (message) {
 }
 
 function isMobileDevice() {
-    console.log((typeof window.orientation !== 'undefined'));
+    alert(typeof window.orientation !== 'undefined');
     return (typeof window.orientation !== 'undefined'); 
 };
   
