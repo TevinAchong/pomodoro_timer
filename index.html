@@ -5,22 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Clock</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 </head>
-<body>
+<body onload="resetForm()">
 
     <h1>Study Timer</h1>
 
-    Session Hours:<input type="number" id="sessionHours" value="0"><br/>
-    Session Minutes:<input type="number" id="sessionMins" value="0"><br/>
-    Session Seconds:<input type="number" id="sessionSecs" value="10"><br/>
-    Break Hours:<input type="number" id="breakHours" value="0"><br/>
-    Break Minutes:<input type="number" id="breakMins" value="0"><br/>
-    Break Seconds:<input type="number" id="breakSecs" value="5"><br/>
-    Number of Sessions: <input type="number" id="numSessions"><br/>
+    <div class="session_stats">
+        <label for="sessionHours">Session Hours</label><br/>
+        <input type="number" id="sessionHours"><br/>
 
-    <button onclick="getTime()">Start</button>
+        <label for="sessionMins">Session Minutes</label><br/>
+        <input type="number" id="sessionMins"><br/>
 
+        <label for="sessionSecs">Session Seconds</label><br/>
+        <input type="number" id="sessionSecs"><br/>
+    </div>
+
+    <div class="break_stats">
+        <label for="breakHours">Break Hours</label><br/>
+        <input type="number" id="breakHours"><br/>
+
+        <label for="breakMins">Break Minutes</label><br/>
+        <input type="number" id="breakMins"><br/>
+
+        <label for="breakSecs">Break Seconds</label><br/>
+        <input type="number" id="breakSecs"><br/>
+    </div>
+
+    <br/><br/><br/><br><br><br>
+    <div class="num_stats">
+        <label for="numSessions">Number of Sessions</label><br/>
+        <input type="number" id="numSessions"><br/>
+    </div>
+    
+    <div class="buttons">
+        <button onclick="getTime()" id="start_button">Start</button>
+        <button id="pause_button" style="display:none">Pause</button>
+        <button id="reset_button" onclick="resetForm()">Reset</button>
+        <button id="white_noise">Toggle White Noise</button>
+    </div>
+
+
+
+    <h1 id="session"></h1>
     <h1 id="status"></h1>
+    <h1 id="time"></h1>
 
     <script src="main.js"></script>
 </body>

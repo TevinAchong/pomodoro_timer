@@ -1,0 +1,46 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.session_stats {
+    width : 40%; 
+    float : left; 
+    border : 2px solid black; 
+    padding : 20px 0; 
+    text-align: center;  
+}
+
+.break_stats {
+    width : 40%; 
+    float : right; 
+    border : 2px solid black; 
+    padding : 20px 0; 
+    text-align: center; 
+}
+
+.num_stats {
+    width : 80%; 
+    margin : 0 auto;
+    text-align: center;
+    padding-top : 150px;  
+}
+
+.session_stats input[type=number] {
+    width : 80%; 
+    margin-bottom : 20px; 
+}
+
+.break_stats input[type=number] {
+    width : 80%; 
+    margin-bottom: 20px; 
+}
+
+.buttons {
+    text-align: center; 
+    margin : 0 auto; 
+    margin-top : 20px; 
+}
+
+h1 {
+    text-align : center; 
+}
