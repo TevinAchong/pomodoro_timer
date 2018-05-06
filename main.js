@@ -179,7 +179,8 @@ function startSession() {
             document.getElementById("session").innerHTML = "Sessions Remaining: " + numSessions;
 
             if (numSessions === 0) { 
-                desktopNotification("You're Done!!");
+                if (!isMobileDevice())
+                    desktopNotification("You're Done!!");
                 document.getElementById("status").innerHTML = "YOU MADE IT!!!";
                 document.getElementById("pause_button").style.display = "none";
                 document.getElementById("start_button").style.display = "inline";
@@ -189,7 +190,8 @@ function startSession() {
             }
             else {
                 clearInterval(st); 
-                desktopNotification("Time To Take a Break!");
+                if (!isMobileDevice())
+                    desktopNotification("Time To Take a Break!");
                 document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
                 ding.play();
                 startBreak();   
@@ -224,7 +226,8 @@ function startBreak() {
         }
         else {
             clearInterval(bt);
-            desktopNotification("Time To Resume Productivity!");
+            if (!isMobileDevice())
+                desktopNotification("Time To Resume Productivity!");
             document.getElementById("status").innerHTML = "Time to Start Back!!!";
             start_horn.play();
             startSession();    
@@ -268,7 +271,6 @@ function toggleWhiteNoise() {
 if ("Notification" in window) {
     console.log("Congrats! You support Notifications"); 
     requestDesktopNotificationPermission();
-    desktopNotification(); 
 }
 
 function requestDesktopNotificationPermission() {
@@ -288,24 +290,20 @@ function desktopNotification(message) {
 }
 
 function sendDesktopNotification (message) {
-    if( !isMobileDevice()) {
-        console.log("Nope");
-        let notification = new Notification("Pomodoro Timer", {
-            icon : "favicon.png", 
-            body : message, 
-            tag : "Notification"
-        });
+    
+    console.log("Nope");
+    let notification = new Notification("Pomodoro Timer", {
+        icon : "favicon.png", 
+        body : message, 
+        tag : "Notification"
+    });
 
-        notification.onclick = function() {
-            parent.focus(); 
-            window.focus(); 
-            this.close(); 
-        }; 
-        setTimeout(notification.close.bind(notification), 5000);
-    }
-    else {
-        console.log("You are on Mobile"); 
-    }
+    notification.onclick = function() {
+        parent.focus(); 
+        window.focus(); 
+        this.close(); 
+    }; 
+    setTimeout(notification.close.bind(notification), 5000);
 }
 
 function isMobileDevice() {
