@@ -182,7 +182,7 @@ function startSession() {
                 if (isMobileDevice() === false)
                     desktopNotification("You're Done!!");
                 else
-                    alert("Mobile Device!");
+                    confirm("Mobile Device");
                 document.getElementById("status").innerHTML = "YOU MADE IT!!!";
                 document.getElementById("pause_button").style.display = "none";
                 document.getElementById("start_button").style.display = "inline";
@@ -195,7 +195,7 @@ function startSession() {
                 if (isMobileDevice() === false)
                     desktopNotification("Time To Take a Break!");
                 else
-                    alert("Mobile Device");
+                    confirm("Mobile Device");
                 document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
                 ding.play();
                 startBreak();   
@@ -233,7 +233,7 @@ function startBreak() {
             if (isMobileDevice() === false)
                 desktopNotification("Time To Resume Productivity!");
             else    
-                alert("Mobile Device");
+                confirm("Mobile Device");
             document.getElementById("status").innerHTML = "Time to Start Back!!!";
             start_horn.play();
             startSession();    
@@ -313,7 +313,6 @@ function sendDesktopNotification (message) {
 }
 
 function isMobileDevice() {
-    alert(typeof window.orientation !== 'undefined');
     return (typeof window.orientation !== 'undefined'); 
 };
   
