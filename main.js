@@ -97,6 +97,10 @@ function getTime() {
 }
 
 
+var finish_horn = new Audio('finish_horn.mp3');
+var ding = new Audio('ding.mp3');
+var start_horn = new Audio('start_horn.mp3');
+
 function startSession() {
     
     document.getElementById("start_button").style.display = "none"; 
@@ -139,7 +143,7 @@ function startSession() {
             if (numSessions === 0) { 
                 document.getElementById("status").innerHTML = "YOU MADE IT!!!";
                 document.getElementById("start_button").style.display = "inline"; 
-                var finish_horn = new Audio('finish_horn.mp3');
+                finish_horn = new Audio('finish_horn.mp3');
                 finish_horn.play();
                 clearInterval(st);
                 return; 
@@ -147,7 +151,7 @@ function startSession() {
             else {
                 clearInterval(st); 
                 document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
-                var ding = new Audio('ding.mp3');
+                ding = new Audio('ding.mp3');
                 ding.play();
                 startBreak();   
             }
@@ -168,7 +172,7 @@ function startBreak() {
         else {
             clearInterval(bt);
             document.getElementById("status").innerHTML = "Time to Start Back!!!";
-            var start_horn = new Audio('start_horn.mp3');
+            start_horn = new Audio('start_horn.mp3');
             start_horn.play();
             startSession();    
         }
@@ -201,5 +205,5 @@ function toggleWhiteNoise() {
         console.log("Paused Audio"); 
     }
     wnCount += 1; 
-    
+
 }
