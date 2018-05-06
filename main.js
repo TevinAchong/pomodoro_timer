@@ -35,7 +35,7 @@ function getTime() {
         
     var sessionMins = document.getElementById("sessionMins").value; 
     if (sessionMins < 0 || sessionMins > 59 || sessionMins === "") {
-        alert("Session Minutes must be greater than 0 and less than 59 (use hours if greater than 60)"); 
+        alert("Session Minutes must be greater than 0 and less than 60 (use hours if greater than 60)"); 
         sessionMins = document.getElementById("sessionMins").value;
     }
     else    
@@ -44,7 +44,7 @@ function getTime() {
     
     var sessionSecs = document.getElementById("sessionSecs").value;
     if (sessionSecs < 0 || sessionSecs > 59 || sessionSecs === "") {
-        alert("Session Seconds must be greater than 0 and less than 59 (use minutes if greater than 60)"); 
+        alert("Session Seconds must be greater than 0 and less than 60 (use minutes if greater than 60)"); 
         sessionSecs = document.getElementById("sessionSecs").value;
     } 
     else
@@ -62,7 +62,7 @@ function getTime() {
 
     var breakMins = document.getElementById("breakMins").value; 
     if (breakMins < 0 || breakMins > 59) {
-        alert("Break Minutes must be greater than 0 and less than 59 (use minutes if greater than 60)"); 
+        alert("Break Minutes must be greater than 0 and less than 60 (use minutes if greater than 60)"); 
         breakMins = document.getElementById("breakMins").value;
     } 
     else
@@ -71,7 +71,7 @@ function getTime() {
 
     var breakSecs = document.getElementById("breakSecs").value; 
     if (breakSecs < 0 || breakSecs > 59 || breakSecs === "") {
-        alert("Break Seconds must be greater than 0 and less than 59 (use minutes if greater than 60)"); 
+        alert("Break Seconds must be greater than 0 and less than 60 (use minutes if greater than 60)"); 
         breakSecs = document.getElementById("breakSecs").value;
     } 
     else
@@ -187,3 +187,20 @@ function resetForm() {
     document.getElementById("session").innerHTML = "";
     document.getElementById("pause_button").style.display = "none"; 
 }
+
+// var white_noise = document.getElementById("white_noise");
+// var isPlaying = false;
+
+// function toggleWhiteNoise() {
+//     if (isPlaying) {
+//       white_noise.pause();
+//     } else {
+//       white_noise.play();
+//     }
+// };
+// white_noise.onplaying = function() {
+//     isPlaying = true;
+// };
+// white_noise.onpause = function() {
+//     isPlaying = false;
+// };

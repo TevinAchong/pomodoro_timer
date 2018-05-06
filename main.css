@@ -22,7 +22,17 @@
     width : 80%; 
     margin : 0 auto;
     text-align: center;
-    padding-top : 150px;  
+    padding-top : 200px;  
+}
+
+.goals {
+    width : 50%; 
+    margin : 0 auto; 
+    text-align: center;
+}
+
+.goals input[type=text] {
+    height : 50px;
 }
 
 .session_stats input[type=number] {
@@ -33,6 +43,14 @@
 .break_stats input[type=number] {
     width : 80%; 
     margin-bottom: 20px; 
+}
+
+.session_stats p {
+    color : red; 
+}
+
+.break_stats p {
+    color : red; 
 }
 
 .buttons {
