@@ -4,7 +4,11 @@
 var sessionTimeInSeconds; 
 var breakTimeInSeconds; 
 var numSessions; 
+var favicon = new Image("favicon.png");
 
+
+// enable vibration support
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 String.prototype.toHHMMSS = function () {
     var sec_num = parseInt(this, 10); // don't forget the second param
@@ -26,71 +30,107 @@ function getTime() {
     var sesCon = false;  
 
     var sessionHrs = document.getElementById("sessionHours").value;
-    if (sessionHrs < 0 || sessionHrs === "") {
+    if (sessionHrs < 0) {
+        alert("Session Hours must be at least 0");
         sessionHrs = document.getElementById("sessionHours").value;
-        alert("Session Hours must be greater than 0");
+    }
+    else if (sessionHrs === "") {
+        document.getElementById("sessionHours").value = 0; 
+        sessionHrs = 0; 
+        hCon = true; 
     }
     else
         hCon = true; 
         
+
     var sessionMins = document.getElementById("sessionMins").value; 
-    if (sessionMins < 0 || sessionMins > 59 || sessionMins === "") {
-        alert("Session Minutes must be greater than 0 and less than 60 (use hours if greater than 60)"); 
+    if (sessionMins < 0 || sessionMins > 59) {
+        alert("Session Minutes must be at least 0 and less than 60 (use hours if greater than 60)"); 
         sessionMins = document.getElementById("sessionMins").value;
+    }
+    else if (sessionMins === "") {
+        document.getElementById("sessionMins").value = 0; 
+        sessionMins = 0; 
+        mCon = true; 
     }
     else    
         mCon = true; 
     
     
     var sessionSecs = document.getElementById("sessionSecs").value;
-    if (sessionSecs < 0 || sessionSecs > 59 || sessionSecs === "") {
-        alert("Session Seconds must be greater than 0 and less than 60 (use minutes if greater than 60)"); 
+    if (sessionSecs < 0 || sessionSecs > 59) {
+        alert("Session Seconds must be at least 0 and less than 60 (use minutes if greater than 60)"); 
         sessionSecs = document.getElementById("sessionSecs").value;
     } 
+    else if (sessionSecs === "") {
+        document.getElementById("sessionSecs").value = 0; 
+        sessionSecs = 0; 
+        sCon = true; 
+    }
     else
         sCon = true; 
 
     //Retrieving break time values from html input
     var breakHrs = document.getElementById("breakHours").value;
-    if (breakHrs > 59 || breakHrs === "") {
-        alert("Break Hours must be greater than 0"); 
+    if (breakHrs > 59) {
+        alert("Break Hours must be at least than 0"); 
         breakHrs = document.getElementById("breakHours").value;
-    } 
+    }
+    else if (breakHrs === "") {
+        document.getElementById("breakHours").value = 0; 
+        breakHrs = 0; 
+        bhCon = true; 
+    }
     else
         bhCon = true; 
     
 
     var breakMins = document.getElementById("breakMins").value; 
     if (breakMins < 0 || breakMins > 59) {
-        alert("Break Minutes must be greater than 0 and less than 60 (use minutes if greater than 60)"); 
+        alert("Break Minutes must be at least 0 and less than 60 (use minutes if greater than 60)"); 
         breakMins = document.getElementById("breakMins").value;
     } 
+    else if (breakMins === "") {
+        document.getElementById("breakMins").value = 0; 
+        breakMins = 0; 
+        bmCon = true; 
+    }
     else
         bmCon = true; 
 
 
     var breakSecs = document.getElementById("breakSecs").value; 
-    if (breakSecs < 0 || breakSecs > 59 || breakSecs === "") {
-        alert("Break Seconds must be greater than 0 and less than 60 (use minutes if greater than 60)"); 
+    if (breakSecs < 0 || breakSecs > 59) {
+        alert("Break Seconds must be at least 0 and less than 60 (use minutes if greater than 60)"); 
         breakSecs = document.getElementById("breakSecs").value;
     } 
+    else if (breakSecs === "") {
+        document.getElementById("breakSecs").value = 0; 
+        breakSecs = 0; 
+        bsCon = true; 
+    }
     else
         bsCon = true; 
      
     sessionTimeInSeconds = parseInt((sessionHrs * 3600)) + parseInt((sessionMins * 60)) + parseInt(sessionSecs); 
-    console.log(sessionTimeInSeconds);
+    
 
     breakTimeInSeconds = parseInt((breakHrs * 3600)) + parseInt((breakMins * 60)) + parseInt(breakSecs); 
-    console.log(breakTimeInSeconds); 
+     
 
     numSessions = document.getElementById("numSessions").value;
-    if (numSessions === "" || numSessions < 1) {
-        alert("Number of sessions must be greater than 0");
+    if (numSessions < 1) {
+        alert("Number of sessions must be at least 1");
         numSessions = document.getElementById("numSessions").value; 
+    }
+    else if (numSessions === "") {
+        document.getElementById("numSessions").value = 0; 
+        numSessions = 0; 
+        sesCon = true; 
     }
     else   
         sesCon = true;  
-    console.log(numSessions); 
+     
 
     if (hCon && mCon && sCon && bhCon && bhCon && bsCon && sesCon)
         startSession();
@@ -111,7 +151,7 @@ function startSession() {
 
     var s1 = sessionTimeInSeconds; 
     var st = setInterval(function() {
-        console.log(s1);
+        
         
         document.getElementById("pause_button").onclick = function() {
             alert("Click OK To Unpause"); 
@@ -134,24 +174,29 @@ function startSession() {
         }
         else {
             
-            console.log("NS: " + numSessions);
+            
             if (numSessions >= 1) 
                 numSessions -= 1;
 
             document.getElementById("session").innerHTML = "Sessions Remaining: " + numSessions;
 
             if (numSessions === 0) { 
+                desktopNotification("You're Done!!");
                 document.getElementById("status").innerHTML = "YOU MADE IT!!!";
-                document.getElementById("start_button").style.display = "inline"; 
-                finish_horn = new Audio('finish_horn.mp3');
+                document.getElementById("pause_button").style.display = "none";
+                document.getElementById("start_button").style.display = "inline";
                 finish_horn.play();
                 clearInterval(st);
                 return; 
             }
             else {
                 clearInterval(st); 
+                desktopNotification("Time To Take a Break!");
                 document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
-                ding = new Audio('ding.mp3');
+                if ("vibrate" in navigator) {
+                    console.log("Vibration Supported");
+                    navigator.vibrate([500, 300, 100]);
+                }
                 ding.play();
                 startBreak();   
             }
@@ -164,15 +209,15 @@ function startSession() {
 function startBreak() {
     var b1 = breakTimeInSeconds;
     var bt = setInterval(function() {
-        console.log(b1);
+        
         if (b1 >= 1) {
             b1 -= 1;
             document.getElementById("time").innerHTML = b1.toString().toHHMMSS();
         }
         else {
             clearInterval(bt);
+            desktopNotification("Time To Resume Productivity!");
             document.getElementById("status").innerHTML = "Time to Start Back!!!";
-            start_horn = new Audio('start_horn.mp3');
             start_horn.play();
             startSession();    
         }
@@ -189,11 +234,14 @@ function resetForm() {
     document.getElementById("numSessions").value = "2";
     document.getElementById("time").innerHTML = ""; 
     document.getElementById("session").innerHTML = "";
+    document.getElementById("status").innerHTML = "";
     document.getElementById("pause_button").style.display = "none"; 
 }
 
 var wnCount = 1; 
 var white_noise = new Audio('white_noise.mp3');
+white_noise.loop = true;
+
 function toggleWhiteNoise() {
      
     if (wnCount % 2 === 1) {
@@ -207,3 +255,45 @@ function toggleWhiteNoise() {
     wnCount += 1; 
 
 }
+
+//Notifications 
+if ("Notification" in window) {
+    console.log("Congrats! You support Notifications"); 
+    requestDesktopNotificationPermission();
+    desktopNotification(); 
+}
+
+function requestDesktopNotificationPermission() {
+    if (Notification && Notification.permission === "default") {
+        Notification.requestPermission(function(permission) {
+            if (!("permission" in Notification)) {
+                Notification.permission = permission; 
+            }
+        });
+    }
+}
+
+function desktopNotification(message) {
+    if (Notification.permission === "granted") { 
+        this.sendDesktopNotification(message);
+    }
+}
+
+function sendDesktopNotification (message) {
+    let notification = new Notification("Pomodoro Timer", {
+        icon : "favicon.png", 
+        body : message, 
+        tag : "Notification"
+    });
+
+    notification.onclick = function() {
+        parent.focus(); 
+        window.focus(); 
+        this.close(); 
+    }; 
+    setTimeout(notification.close.bind(notification), 5000);
+}
+  
+
+
+
