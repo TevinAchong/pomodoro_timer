@@ -43,7 +43,7 @@
     
 
     
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br>
     <div class="num_stats">
         <label for="numSessions">Number of Sessions</label><br/>
         <input type="number" id="numSessions"><br/>
@@ -53,14 +53,17 @@
         <button onclick="getTime()" id="start_button">Start</button>
         <button id="pause_button" style="display:none">Pause</button>
         <button id="reset_button" onclick="resetForm()">Reset</button><br/>
-        <!-- <button id="white_noise" onclick="toggleWhiteNoise()">Toggle White Noise</button> -->
+        <button id="white_noise" onclick="toggleWhiteNoise()">Toggle White Noise</button>
         <!-- <button id="full_pomodoro">Full Pomodoro Functionality</button> -->
     </div>
 
 
     
 
-    <!-- <audio id="white_noise" src="white_noise.mp3"></audio> -->
+    <audio id="white_noise">
+        <source src="white_noise.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <h1 id="session"></h1>
     <h1 id="status"></h1>

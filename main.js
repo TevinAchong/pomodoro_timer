@@ -188,19 +188,18 @@ function resetForm() {
     document.getElementById("pause_button").style.display = "none"; 
 }
 
-// var white_noise = document.getElementById("white_noise");
-// var isPlaying = false;
-
-// function toggleWhiteNoise() {
-//     if (isPlaying) {
-//       white_noise.pause();
-//     } else {
-//       white_noise.play();
-//     }
-// };
-// white_noise.onplaying = function() {
-//     isPlaying = true;
-// };
-// white_noise.onpause = function() {
-//     isPlaying = false;
-// };
+var wnCount = 1; 
+var white_noise = new Audio('white_noise.mp3');
+function toggleWhiteNoise() {
+     
+    if (wnCount % 2 === 1) {
+        white_noise.play(); 
+        console.log("Audio Playing"); 
+    }
+    else {
+        white_noise.pause(); 
+        console.log("Paused Audio"); 
+    }
+    wnCount += 1; 
+    
+}
