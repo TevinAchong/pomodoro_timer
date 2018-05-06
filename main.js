@@ -194,8 +194,6 @@ function startSession() {
                 clearInterval(st); 
                 if (isMobileDevice() === false)
                     desktopNotification("Time To Take a Break!");
-                else
-                    confirm("Mobile Device");
                 document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
                 ding.play();
                 startBreak();   
@@ -232,8 +230,7 @@ function startBreak() {
             clearInterval(bt);
             if (isMobileDevice() === false)
                 desktopNotification("Time To Resume Productivity!");
-            else    
-                confirm("Mobile Device");
+            
             document.getElementById("status").innerHTML = "Time to Start Back!!!";
             start_horn.play();
             startSession();    
@@ -290,7 +287,7 @@ function requestDesktopNotificationPermission() {
 }
 
 function desktopNotification(message) {
-    if (Notification.permission === "granted") { 
+    if (Notification.permission === "granted" && "Notification" in window) { 
         this.sendDesktopNotification(message);
     }
 }
