@@ -179,7 +179,7 @@ function startSession() {
             document.getElementById("session").innerHTML = "Sessions Remaining: " + numSessions;
 
             if (numSessions === 0) { 
-                if (!isMobileDevice())
+                if (isMobileDevice())
                     desktopNotification("You're Done!!");
                 else
                     alert("Mobile Device!");
@@ -192,7 +192,7 @@ function startSession() {
             }
             else {
                 clearInterval(st); 
-                if (!isMobileDevice())
+                if (isMobileDevice())
                     desktopNotification("Time To Take a Break!");
                 else
                     alert("Mobile Device");
@@ -230,7 +230,7 @@ function startBreak() {
         }
         else {
             clearInterval(bt);
-            if (!isMobileDevice())
+            if (isMobileDevice())
                 desktopNotification("Time To Resume Productivity!");
             else    
                 alert("Mobile Device");
