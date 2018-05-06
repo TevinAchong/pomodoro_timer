@@ -7,8 +7,6 @@ var numSessions;
 var favicon = new Image("favicon.png");
 
 
-// enable vibration support
-navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 String.prototype.toHHMMSS = function () {
     var sec_num = parseInt(this, 10); // don't forget the second param
@@ -193,10 +191,6 @@ function startSession() {
                 clearInterval(st); 
                 desktopNotification("Time To Take a Break!");
                 document.getElementById("status").innerHTML = "Time to Take a Break!!!"; 
-                if ("vibrate" in navigator) {
-                    console.log("Vibration Supported");
-                    navigator.vibrate([500, 300, 100]);
-                }
                 ding.play();
                 startBreak();   
             }
@@ -210,6 +204,20 @@ function startBreak() {
     var b1 = breakTimeInSeconds;
     var bt = setInterval(function() {
         
+        document.getElementById("pause_button").onclick = function() {
+            alert("Click OK To Unpause"); 
+        }
+
+        document.getElementById("reset_button").onclick = function() {
+            var reset = confirm("Are you sure you want to reset the timer?"); 
+            if (reset) {
+                resetForm(); 
+                clearInterval(bt); 
+                document.getElementById("start_button").style.display = "inline";
+                return;
+            }
+        }
+
         if (b1 >= 1) {
             b1 -= 1;
             document.getElementById("time").innerHTML = b1.toString().toHHMMSS();
@@ -280,19 +288,29 @@ function desktopNotification(message) {
 }
 
 function sendDesktopNotification (message) {
-    let notification = new Notification("Pomodoro Timer", {
-        icon : "favicon.png", 
-        body : message, 
-        tag : "Notification"
-    });
+    if( !isMobileDevice()) {
+        console.log("Nope");
+        let notification = new Notification("Pomodoro Timer", {
+            icon : "favicon.png", 
+            body : message, 
+            tag : "Notification"
+        });
 
-    notification.onclick = function() {
-        parent.focus(); 
-        window.focus(); 
-        this.close(); 
-    }; 
-    setTimeout(notification.close.bind(notification), 5000);
+        notification.onclick = function() {
+            parent.focus(); 
+            window.focus(); 
+            this.close(); 
+        }; 
+        setTimeout(notification.close.bind(notification), 5000);
+    }
+    else {
+        console.log("You are on Mobile"); 
+    }
 }
+
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
   
 
 
