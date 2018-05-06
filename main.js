@@ -181,8 +181,6 @@ function startSession() {
             if (numSessions === 0) { 
                 if (isMobileDevice() === false)
                     desktopNotification("You're Done!!");
-                else
-                    confirm("Mobile Device");
                 document.getElementById("status").innerHTML = "YOU MADE IT!!!";
                 document.getElementById("pause_button").style.display = "none";
                 document.getElementById("start_button").style.display = "inline";
